@@ -1,6 +1,7 @@
 import { User, createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Image from "next/image";
+import avatar_placeholder from "../../public/avatar-placeholder.png";
 
 export default function CreateTweetForm({ user }: { user: User }) {
   const addTweet = async (formData: FormData) => {
@@ -15,7 +16,7 @@ export default function CreateTweetForm({ user }: { user: User }) {
       <div className="flex py-8 px-4">
         <div className="h-12 w-12">
           <Image
-            src={user.user_metadata.avatar_url}
+            src={user.user_metadata.avatar_url ?? avatar_placeholder}
             alt="user avatar"
             width={48}
             height={48}
