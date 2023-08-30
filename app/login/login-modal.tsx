@@ -20,7 +20,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
         password,
       });
       router.push("/");
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error.message, {
         position: toast.POSITION.TOP_LEFT,
       });
@@ -47,7 +47,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
       });
       if (error) throw new Error(error.message);
       router.push("/");
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error.message, {
         position: toast.POSITION.TOP_LEFT,
       });
