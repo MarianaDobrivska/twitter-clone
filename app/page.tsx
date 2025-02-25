@@ -2,7 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AuthButtonServer from "./components/auth-btn-server";
 import { redirect } from "next/navigation";
-import CreateTweetForm from "./components/create-tweet-form";
+import CreateTweetForm from "./components/tweet/create-tweet-form";
 import Tweets from "./components/tweets-list";
 
 export const dynamic = "force-dynamic";
