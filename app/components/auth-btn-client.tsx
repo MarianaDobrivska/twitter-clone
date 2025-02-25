@@ -5,6 +5,8 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 
+const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL || location.origin;
+
 export default function AuthButtonClient({
   session,
 }: {
@@ -15,7 +17,7 @@ export default function AuthButtonClient({
   const handleSignIn = async () => {
     await supabase.auth.signInWithOAuth({
       provider: "github",
-      options: { redirectTo: `${location.origin}/auth/callback` },
+      options: { redirectTo: `${redirectUrl}/auth/callback` },
     });
   };
 

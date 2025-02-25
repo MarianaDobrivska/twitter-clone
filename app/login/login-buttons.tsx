@@ -4,13 +4,15 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 import LoginModal from "./login-modal";
 
+const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL || location.origin;
+
 export default function GitHubButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const supabase = createClientComponentClient<Database>();
   const handleSignIn = async () => {
     await supabase.auth.signInWithOAuth({
       provider: "github",
-      options: { redirectTo: `${location.origin}/auth/callback` },
+      options: { redirectTo: `${redirectUrl}/auth/callback` },
     });
   };
   const onOpen = () => {
