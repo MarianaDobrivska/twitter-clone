@@ -34,8 +34,7 @@ export default function GitHubButton() {
           priority
         />
       </button>
-      {/* Temporarily disable email login until issue is fixed */}
-      {/* <button className="hover:bg-gray-800 p-8 rounded-xl" onClick={onOpen}>
+      <button className="hover:bg-gray-800 p-8 rounded-xl" onClick={onOpen}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="100"
@@ -50,7 +49,7 @@ export default function GitHubButton() {
           <circle cx="12" cy="12" r="4"></circle>
           <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
         </svg>
-      </button> */}
+      </button>
       {isModalOpen && <LoginModal onClose={onClose} />}
     </div>
   );
