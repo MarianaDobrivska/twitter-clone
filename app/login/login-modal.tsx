@@ -28,18 +28,6 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
   };
 
   const signIn = async (email: string, password: string) => {
-    const { data } = await supabase
-      .from("profiles")
-      .select("name")
-      .eq("name", email);
-
-    if (data && !data.length) {
-      toast.error("User does not exist", {
-        position: toast.POSITION.TOP_LEFT,
-      });
-      return;
-    }
-
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
