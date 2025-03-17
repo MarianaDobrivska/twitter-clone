@@ -39,7 +39,7 @@ export default async function Home() {
         <AuthButtonServer />
       </div>
       <CreateTweetForm user={session.user} />
-      <Tweets tweets={tweets} />
+      <Tweets tweets={tweets} user={session.user} />
     </div>
   );
 }

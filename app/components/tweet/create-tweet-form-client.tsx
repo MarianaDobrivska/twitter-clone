@@ -3,8 +3,6 @@ import { useRef, useTransition } from "react";
 import Image from "next/image";
 import { User } from "@supabase/supabase-js";
 
-import avatar_placeholder from "../../../public/avatar-placeholder.png";
-
 export default function TweetFormClient({
   user,
   addTweet,
@@ -35,7 +33,7 @@ export default function TweetFormClient({
       <div className="flex py-8 px-4">
         <div className="h-12 w-12">
           <Image
-            src={user.user_metadata.avatar_url ?? avatar_placeholder}
+            src={user.user_metadata.avatar_url ?? "/avatar-placeholder.png"}
             alt="user avatar"
             width={48}
             height={48}

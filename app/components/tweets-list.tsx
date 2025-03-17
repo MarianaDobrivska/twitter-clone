@@ -1,12 +1,21 @@
 "use client";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import {
+  createClientComponentClient,
+  User,
+} from "@supabase/auth-helpers-nextjs";
 import Likes from "./likes";
 import { experimental_useOptimistic as useOptimistic, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import avatar_placeholder from "public/avatar-placeholder.png";
+import DeleteButton from "./delete-btn";
 
-export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
+export default function Tweets({
+  tweets,
+  user,
+}: {
+  tweets: TweetWithAuthor[];
+  user: User;
+}) {
   const [optimisticTweets, addOptimisticTweet] = useOptimistic<
     TweetWithAuthor[],
     TweetWithAuthor
@@ -20,6 +29,8 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   });
   const supabase = createClientComponentClient<Database>();
   const router = useRouter();
+
+  const isUserAuthor = (tweet: TweetWithAuthor) => user.id === tweet.user_id;
 
   useEffect(() => {
     const channel = supabase
@@ -45,17 +56,17 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   return optimisticTweets.map((tweet) => (
     <div
       key={tweet.id}
-      className="border border-gray-800 border-t-0 px-4 py-8 flex">
-      <div className="h-12 w-12">
+      className="border border-gray-800 border-t-0 px-4 py-8 flex relative">
+      <div className="h-12 w-12 ">
         <Image
           className="rounded-full"
-          src={tweet.author.avatar_url ?? avatar_placeholder}
+          src={tweet.author.avatar_url ?? "/avatar-placeholder.png"}
           alt="user avatar"
           width={48}
           height={48}
         />
       </div>
-      <div className="ml-4">
+      <div className="ml-4 ">
         <p>
           {tweet.author.username && (
             <span className="font-bold mr-2">{tweet.author.username}</span>
@@ -64,6 +75,7 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
         </p>
         <p>{tweet.title}</p>
         <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweet} />
+        {isUserAuthor(tweet) && <DeleteButton tweet={tweet} />}
       </div>
     </div>
   ));
