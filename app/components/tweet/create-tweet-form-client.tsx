@@ -16,6 +16,9 @@ export default function TweetFormClient({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    const title = formData.get("title") as string;
+
+    if (!title.trim()) return;
 
     startTransition(async () => {
       await addTweet(formData);

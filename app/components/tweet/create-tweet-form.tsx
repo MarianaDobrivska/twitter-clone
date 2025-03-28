@@ -5,7 +5,7 @@ import TweetFormClient from "./create-tweet-form-client";
 export default function CreateTweetForm({ user }: { user: User }) {
   const addTweet = async (formData: FormData) => {
     "use server";
-    const title = String(formData.get("title"));
+    const title = String(formData.get("title")).trim();
     const supabase = createServerActionClient<Database>({ cookies });
     await supabase.from("tweets").insert({ title, user_id: user.id });
   };
