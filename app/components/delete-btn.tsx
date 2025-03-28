@@ -2,6 +2,7 @@
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function DeleteButton({ tweet }: { tweet: TweetWithAuthor }) {
   const [loading, setLoading] = useState(false);
@@ -17,8 +18,10 @@ export default function DeleteButton({ tweet }: { tweet: TweetWithAuthor }) {
         .eq("id", tweet.id);
 
       if (error) throw new Error(error.message);
+      toast.success("Tweet deleted successfully.");
       console.log("Tweet deleted successfully.");
     } catch (error) {
+      toast.error("Error deleting tweet. Please try again.");
       console.error("Error deleting tweet:", error);
     } finally {
       setLoading(false);
@@ -27,7 +30,7 @@ export default function DeleteButton({ tweet }: { tweet: TweetWithAuthor }) {
   return (
     <button
       disabled={loading}
-      className="text-sm text-gray-400 absolute top-5 right-5"
+      className="text-lg text-gray-400"
       onClick={onClick}>
       🗙
     </button>
