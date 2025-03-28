@@ -48,6 +48,7 @@ export default function TweetFormClient({
           className="bg-inherit flex-1 ml-2 text-2xl outline-none leading-loose placeholder-gray-500 px-2"
           placeholder={isPending ? "Publishing..." : "What is happening?!"}
           disabled={isPending}
+          maxLength={100}
         />
         {isPending && (
           <div className="absolute top-[40%] right-4 w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />

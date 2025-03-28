@@ -82,17 +82,18 @@ const TweetItem = ({ tweet, user, addOptimisticTweet }: TweetItemProps) => {
           )}
           <span className="text-sm text-gray-400">{tweet.author.name}</span>
         </p>
-        <input
+        <textarea
           value={editedTitle}
           readOnly={!editMode}
           disabled={!editMode}
+          maxLength={100}
           onChange={(e) => setEditedTitle(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter" && editMode) handleConfirmClick();
           }}
-          className={`border py-[4px] ${
+          className={`border py-[4px] w-full resize-none overflow-hidden ${
             editMode
-              ? "border-gray-400 rounded-md px-[4px] w-full"
+              ? "border-gray-400 rounded-md px-[4px]"
               : "border-transparent"
           } bg-transparent`}
         />
